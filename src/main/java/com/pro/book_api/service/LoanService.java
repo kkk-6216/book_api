@@ -1,6 +1,5 @@
 package com.pro.book_api.service;
 
-import com.pro.book_api.dto.LoanDto;
 import com.pro.book_api.model.Book;
 import com.pro.book_api.model.Loan;
 import com.pro.book_api.model.Reader;

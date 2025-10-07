@@ -1,5 +1,6 @@
 package com.pro.book_api.service;
 
+import com.pro.book_api.handler.exception.ResourceAlreadyExistsException;
 import com.pro.book_api.model.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class BookService {
 
     @Transactional
     public Book create(Book entity) {
+        if(bookRepository.existsByIsbn(entity.getIsbn())) throw new ResourceAlreadyExistsException("Книга с ISBN " + entity.getIsbn() + " уже существует");
         return bookRepository.save(entity);
     }
 

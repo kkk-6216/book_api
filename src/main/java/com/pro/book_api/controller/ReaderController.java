@@ -5,6 +5,7 @@ import com.pro.book_api.dto.ReaderDto;
 import com.pro.book_api.mapper.ReaderMapper;
 import com.pro.book_api.model.Reader;
 import com.pro.book_api.service.ReaderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ReaderController {
     private final ReaderMapper readerMapper;
 
     @PostMapping
-    public ResponseEntity<ReaderDto> createReader(@RequestBody ReaderCreateDto reader) {
+    public ResponseEntity<ReaderDto> createReader(@RequestBody @Valid ReaderCreateDto reader) {
 
         Reader createdReader = readerService.create(readerMapper.toEntity(reader));
 

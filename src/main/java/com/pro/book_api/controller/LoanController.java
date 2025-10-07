@@ -9,6 +9,7 @@ import com.pro.book_api.model.Reader;
 import com.pro.book_api.service.BookService;
 import com.pro.book_api.service.LoanService;
 import com.pro.book_api.service.ReaderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class LoanController {
     private final LoanMapper loanMapper;
 
     @PostMapping
-    public ResponseEntity<LoanDto> addLoan(@RequestBody LoanCreateDto loan) {
+    public ResponseEntity<LoanDto> addLoan(@RequestBody @Valid LoanCreateDto loan) {
 
         Book book = bookService.getBookById(loan.getBookId());
         if(book.getAvailableCopies() == 0) throw new RuntimeException("Книга в данный момент отсутствует");

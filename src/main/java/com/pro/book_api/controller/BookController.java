@@ -5,6 +5,7 @@ import com.pro.book_api.dto.BookDto;
 import com.pro.book_api.mapper.BookMapper;
 import com.pro.book_api.model.Book;
 import com.pro.book_api.service.BookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class BookController {
     private final BookMapper bookMapper;
 
     @PostMapping
-    public ResponseEntity<BookDto> createBook(@RequestBody BookCreateDto book) {
+    public ResponseEntity<BookDto> createBook(@RequestBody @Valid BookCreateDto book) {
 
         Book createdBook = bookService.create(bookMapper.toEntity(book));
 
@@ -41,7 +42,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookDto> updateBook(@PathVariable Long id, @RequestBody BookCreateDto dto) {
+    public ResponseEntity<BookDto> updateBook(@PathVariable Long id, @Valid @RequestBody BookCreateDto dto) {
         Book updated = bookService.update(id, bookMapper.toEntity(dto));
         return ResponseEntity.ok(bookMapper.toDto(updated));
     }
